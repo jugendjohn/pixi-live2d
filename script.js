@@ -6,7 +6,8 @@
   const app = new PIXI.Application({
     width: window.innerWidth,
     height: window.innerHeight,
-    backgroundColor: 0x1099bb
+    backgroundColor: 0x1099bb,
+    resizeTo: window
   });
 
   // Add the canvas to the document
@@ -16,9 +17,9 @@
   const { Live2DModel } = PIXI.live2d;
 
   try {
-    // ✅ Use full GitHub Pages URL to the model
+    // ✅ Use the main model3.json file in the runtime folder
     const model = await Live2DModel.from(
-      'https://jugendjohn.github.io/pixi-live2d/asset/haru_greeter_pro_jp/model.json'
+      'https://raw.githubusercontent.com/jugendjohn/pixi-live2d/main/asset/haru_greeter_pro_jp/runtime/haru_greeter_t05.model3.json'
     );
 
     // Center the model
@@ -29,6 +30,12 @@
 
     // Add to the stage
     app.stage.addChild(model);
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      model.x = app.screen.width / 2;
+      model.y = app.screen.height / 2;
+    });
 
     // Simple idle animation
     app.ticker.add(() => {
