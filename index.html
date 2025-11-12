@@ -22,7 +22,7 @@
 
     // Load Live2D model
     const modelPath = 'https://github.com/jugendjohn/pixi-live2d/tree/main/asset/haru_greeter_pro_jp/runtime/haru_greeter_t05.cmo3'; // adjust path
-    PIXI.Live2DModel.from(modelPath).then.(model => {
+    PIXI.Live2DModel.from(modelPath).then(model => {
         model.x = app.renderer.width / 2;
         model.y = app.renderer.height / 2;
         model.scale.set(0.5); // adjust scale as needed
