@@ -19,7 +19,7 @@
   try {
     // ✅ Use the main model3.json file in the runtime folder
     const model = await Live2DModel.from(
-      'https://raw.githubusercontent.com/jugendjohn/pixi-live2d/main/asset/haru_greeter_pro_jp/runtime/haru_greeter_t05.model3.json'
+      'https://github.com/jugendjohn/pixi-live2d/tree/main/asset/haru_greeter_pro_jp/runtime/haru_greeter_t05.model3.json'
     );
 
     // Center the model
