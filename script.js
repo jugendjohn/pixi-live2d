@@ -16,8 +16,10 @@
   const { Live2DModel } = PIXI.live2d;
 
   try {
-    // Load your model from the asset folder (relative path!)
-    const model = await Live2DModel.from('./asset/model.json');
+    // ✅ Use full GitHub Pages URL to the model
+    const model = await Live2DModel.from(
+      'https://jugendjohn.github.io/pixi-live2d/asset/haru_greeter_pro_jp/model.json'
+    );
 
     // Center the model
     model.anchor.set(0.5);
@@ -33,6 +35,6 @@
       model.rotation = Math.sin(Date.now() * 0.001) * 0.02;
     });
   } catch (err) {
-    console.error('Failed to load Live2D model:', err);
+    console.error('❌ Failed to load Live2D model:', err);
   }
 })();
