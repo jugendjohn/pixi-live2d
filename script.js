@@ -1,19 +1,40 @@
-// Create a PixiJS app
-const app = new PIXI.Application({ 
-  width: 800, 
-  height: 600, 
-  backgroundColor: 0x1099bb 
-});
-document.body.appendChild(app.view);
+(async () => {
+  // Make PIXI accessible for the plugin
+  window.PIXI = PIXI;
 
-// Add a sprite
-const sprite = PIXI.Sprite.from("https://pixijs.io/examples/examples/assets/bunny.png");
-sprite.anchor.set(0.5);
-sprite.x = app.screen.width / 2;
-sprite.y = app.screen.height / 2;
-app.stage.addChild(sprite);
+  // Create the PIXI application
+  const app = new PIXI.Application({
+    width: window.innerWidth,
+    height: window.innerHeight,
+    backgroundColor: 0x1099bb
+  });
 
-// Animate
-app.ticker.add(() => {
-  sprite.rotation += 0.05;
-});
+  // Add the canvas to the document
+  document.body.appendChild(app.view);
+
+  // Load the Live2D plugin
+  const { Live2DModel } = PIXI.live2d;
+
+  try {
+    // ✅ Use full GitHub Pages URL to the model
+    const model = await Live2DModel.from(
+      'https://jugendjohn.github.io/pixi-live2d/asset/haru_greeter_pro_jp/model.json'
+    );
+
+    // Center the model
+    model.anchor.set(0.5);
+    model.x = app.screen.width / 2;
+    model.y = app.screen.height / 2;
+    model.scale.set(0.5);
+
+    // Add to the stage
+    app.stage.addChild(model);
+
+    // Simple idle animation
+    app.ticker.add(() => {
+      model.rotation = Math.sin(Date.now() * 0.001) * 0.02;
+    });
+  } catch (err) {
+    console.error('❌ Failed to load Live2D model:', err);
+  }
+})();
