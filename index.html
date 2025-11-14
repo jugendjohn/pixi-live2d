@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Pixi Live2D Test</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.2.4/pixi.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/pixi-live2d-display.umd.min.js"></script>
+    <script src="https://unpkg.com/pixi-live2d-display/dist/pixi-live2d-display.umd.min.js"></script>
+
     <style>
         body { margin: 0; overflow: hidden; background: #f0f0f0; }
         canvas { display: block; }
@@ -35,4 +36,9 @@
     .catch(err => console.error('Failed to load Live2D model:', err));
 
     window.addEventListener('resize', () => {
-        app.renderer.resize(windo
+        app.renderer.resize(window.innerWidth, window.innerHeight);
+    });
+</script>
+
+</body>
+</html>
