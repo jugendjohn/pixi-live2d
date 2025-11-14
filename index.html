@@ -12,30 +12,31 @@
 </head>
 <body>
 <script>
-    // Create PIXI app
-    const app = new PIXI.Application({ 
-        width: window.innerWidth, 
-        height: window.innerHeight, 
-        backgroundAlpha: 0 
+    const app = new PIXI.Application({
+        width: window.innerWidth,
+        height: window.innerHeight,
+        backgroundAlpha: 0,
     });
-    document.body.appendChild(app.view);
 
-    // Load Live2D model
-    const modelPath = 'https://github.com/jugendjohn/pixi-live2d/tree/main/asset/haru_greeter_pro_jp/runtime/haru_greeter_t05.cmo3'; // adjust path
-    PIXI.Live2DModel.from(modelPath).then(model => {
+    document.body.appendChild(app.view);
+    const modelPath = 'asset/haru_greeter_pro_jp/runtime/haru_greeter_t05.model3.json';
+    PIXI.live2d.Live2DModel.from(modelPath).then(model => {
+
         model.x = app.renderer.width / 2;
-        model.y = app.renderer.height / 2;
-        model.scale.set(0.5); // adjust scale as needed
-        model.anchor.set(0.5, 1); // pivot
+        model.y = app.renderer.height;
+        model.anchor.set(0.5, 1);
+        model.scale.set(0.5);
+
         app.stage.addChild(model);
+
     }).catch(err => {
         console.error('Failed to load Live2D model:', err);
     });
 
-    // Handle window resize
     window.addEventListener('resize', () => {
         app.renderer.resize(window.innerWidth, window.innerHeight);
     });
 </script>
+
 </body>
 </html>
