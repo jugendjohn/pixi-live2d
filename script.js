@@ -19,7 +19,7 @@
 
   try {
     // Load the model
-    const model = await Live2DModel.from('haru_greeter_pro_jp/runtime/haru_greeter_t03.can3');
+    const model = await Live2DModel.from('asset/haru_greeter_pro_jp/runtime/haru_greeter_t03.can3');
 
     // Optional: position and scale
     model.scale.set(0.5); // adjust size
