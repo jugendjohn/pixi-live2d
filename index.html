@@ -1,44 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Pixi Live2D Test</title>
-    <script src="https://pixijs.download/release/pixi.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/jugendjohn/pixi-live2d@main/dist/pixi-live2d.min.js"></script>
-    <script src="script.js"></script>
-    <style>
-        body { margin: 0; overflow: hidden; background: #f0f0f0; }
-        canvas { display: block; }
-    </style>
-
+  <meta charset="UTF-8">
+  <title>Live2D Haru Model</title>
+  <style>
+    /* Make canvas fill the screen */
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      background-color: #1099bb;
+    }
+  </style>
 </head>
 <body>
+  <!-- PIXI.js -->
+  <script src="https://pixijs.download/release/pixi.min.js"></script>
 
-<script>
-    const app = new PIXI.Application({
-        width: window.innerWidth,
-        height: window.innerHeight,
-        backgroundAlpha: 0,
-    });
+  <!-- Live2D plugin -->
+  <script src="https://cdn.jsdelivr.net/gh/jugendjohn/pixi-live2d@main/dist/pixi-live2d.min.js"></script>
 
-    document.body.appendChild(app.view);
-
-    const modelPath = 'asset/haru_greeter_pro_jp/runtime/haru_greeter_t05.model3.json';
-
-    PIXI.live2d.Live2DModel.from(modelPath).then(model => {
-        model.x = app.renderer.width / 2;
-        model.y = app.renderer.height;
-        model.anchor.set(0.5, 1);
-        model.scale.set(0.5);
-
-        app.stage.addChild(model);
-    })
-    .catch(err => console.error('Failed to load Live2D model:', err));
-
-    window.addEventListener('resize', () => {
-        app.renderer.resize(window.innerWidth, window.innerHeight);
-    });
-</script>
-
+  <!-- Your custom script -->
+  <script src="script.js"></script>
 </body>
 </html>
