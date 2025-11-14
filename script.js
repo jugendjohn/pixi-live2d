@@ -1,6 +1,5 @@
 (async () => {
-  window.PIXI = PIXI;
-
+  // Create PIXI application
   const app = new PIXI.Application({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -10,29 +9,29 @@
 
   document.body.appendChild(app.view);
 
+  // Ensure Live2D plugin exists
+  if (!PIXI.live2d) {
+    console.error("PIXI.live2d is not loaded. Check your script includes!");
+    return;
+  }
+
   const { Live2DModel } = PIXI.live2d;
 
   try {
-    const model = await Live2DModel.from(
-      'https://jugendjohn.github.io/pixi-live2d/asset/haru_greeter_pro_jp/runtime/haru_greeter_t05.model3.json'
-    );
+    // Load the model
+    const model = await Live2DModel.from('haru_greeter_pro_jp/runtime/haru_greeter_t03.can3');
 
-    model.anchor.set(0.5);
+    // Optional: position and scale
+    model.scale.set(0.5); // adjust size
     model.x = app.screen.width / 2;
     model.y = app.screen.height / 2;
-    model.scale.set(0.5);
+    model.anchor.set(0.5, 0.5);
 
+    // Add to stage
     app.stage.addChild(model);
 
-    window.addEventListener('resize', () => {
-      model.x = app.screen.width / 2;
-      model.y = app.screen.height / 2;
-    });
-
-    app.ticker.add(() => {
-      model.rotation = Math.sin(Date.now() * 0.001) * 0.02;
-    });
+    console.log("Live2D model loaded successfully!");
   } catch (err) {
-    console.error('❌ Failed to load Live2D model:', err);
+    console.error("Failed to load Live2D model:", err);
   }
 })();
