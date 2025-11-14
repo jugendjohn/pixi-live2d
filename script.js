@@ -13,7 +13,6 @@
   const { Live2DModel } = PIXI.live2d;
 
   try {
-    // Correct GitHub Pages URL
     const model = await Live2DModel.from(
       'https://jugendjohn.github.io/pixi-live2d/asset/haru_greeter_pro_jp/runtime/haru_greeter_t05.model3.json'
     );
