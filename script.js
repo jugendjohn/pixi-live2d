@@ -35,3 +35,17 @@
     "asset/haru_greeter_pro_jp/runtime/haru_greeter_t03.model3.json";
 
   try {
+    const model = await Live2DModel.from(MODEL_PATH);
+
+    model.anchor.set(0.5);
+    model.scale.set(0.5);
+    model.x = app.screen.width / 2;
+    model.y = app.screen.height / 2;
+
+    app.stage.addChild(model);
+
+    console.log("✅ Model loaded!");
+  } catch (e) {
+    console.error("❌ MODEL LOAD ERROR:", e);
+  }
+})();
