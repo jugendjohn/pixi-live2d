@@ -1,3 +1,7 @@
+import * as PIXI from 'pixi.js';
+import { Live2DModel } from 'pixi-live2d-display';
+window.PIXI = PIXI;
+
 (async () => {
   // Safety check: PIXI loaded?
   if (typeof PIXI === "undefined") {
@@ -29,21 +33,26 @@
 
   let model;
 
-  try {
-    model = await Live2DModel.from(MODEL_PATH);
-  } catch (err) {
-    console.error("❌ MODEL LOAD ERROR:", err);
-    return;
-  }
+(async function () {
+  const app = new PIXI.Application({
+    view: document.getElementById('canvas'),
+  });
 
+  const model = await Live2DModel.from(PMODEL_ATH);
+  app.stage.addChild(model);
   //
   // 3. Position + scale model
   //
-  model.x = app.screen.width / 2;
-  model.y = app.screen.height / 2;
+  model.x = 100;
+  model.y = 100;
+  model.rotation = Math.PI;
+  model.skew.x = Math.PI;
+  model.scale.set(2, 2);
   model.anchor.set(0.5, 0.5);
-  model.scale.set(0.5);
-
+  // interaction
+  model.on('hit', (hitAreas) => {
+    if (hitAreas.includes('body')) {
+      model.motion('tap_body');
   //
   // 4. Add to stage
   //
